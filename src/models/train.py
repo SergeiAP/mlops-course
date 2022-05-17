@@ -3,10 +3,6 @@ import pandas as pd
 import joblib as jb
 import lightgbm as lgb
 
-from typing import List
-from sklearn.metrics import mean_absolute_error, mean_squared_error
-
-
 
 FEATURES = ['price', 'geo_lat', 'geo_lon', 'building_type', 'level', 'levels',
             'area', 'kitchen_area', 'object_type', 'year', 'month',
@@ -16,7 +12,7 @@ FEATURES = ['price', 'geo_lat', 'geo_lon', 'building_type', 'level', 'levels',
 @click.command()
 @click.argument("input_paths", type=click.Path(exists=True), nargs=2)
 @click.argument("output_path", type=click.Path())
-def train(input_paths: List[str], output_path: str):
+def train(input_paths: list[str], output_path: str):
     train_df = pd.read_csv(input_paths[0])
     test_df = pd.read_csv(input_paths[1])
 
@@ -51,5 +47,4 @@ def train(input_paths: List[str], output_path: str):
 
 
 if __name__ == "__main__":
-    train()
-
+    train() # pylint: disable=no-value-for-parameter

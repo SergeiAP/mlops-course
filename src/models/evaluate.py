@@ -3,7 +3,7 @@ import pandas as pd
 import joblib as jb
 from typing import List
 
-from sklearn.metrics import accuracy_score, precision_score, mean_absolute_error, mean_squared_error, make_scorer, confusion_matrix, recall_score, roc_auc_score
+from sklearn.metrics import mean_absolute_error, mean_squared_error
 import lightgbm as lgb
 
 
@@ -31,5 +31,5 @@ def evaluate(input_paths: List[str], output_path: str):
 
 
 if __name__ == "__main__":
-    evaluate()
+    evaluate()  # pylint: disable=no-value-for-parameter
 
