@@ -1,0 +1,16 @@
+schema: '2.0'
+stages:
+  select_region:
+    cmd: python src/data/select_region.py data/raw/all_v2.csv data/interim/data_regional.csv
+      2661
+    deps:
+    - path: data/raw/all_v2.csv
+      md5: 00af12733984c983b49f412cef232a9f
+      size: 408179741
+    - path: src/data/select_region.py
+      md5: 24d56375ac214cfaf1b2ed28b85542e6
+      size: 991
+    outs:
+    - path: data/interim/data_regional.csv
+      md5: ce43fe511dd122670f536b2ef3d26136
+      size: 32927996
