@@ -1,0 +1,9 @@
+[core]
+    remote = test-bucket-sergei-a-p
+['remote "test-bucket-sergei-a-p"']
+    url = s3://test-bucket-sergei-a-p/all_v2.csv
+    endpointurl = https://storage.yandexcloud.net
+    access_key_id = YCAJE3KkLApg8CwkaKZZQd4nt
+    secret_access_key = YCNtG-ZRDeS0lUi9ZbD3_6vETEBTaQLzSZf_T1bT
+    ssl_verify = false
+    use_ssl = false
