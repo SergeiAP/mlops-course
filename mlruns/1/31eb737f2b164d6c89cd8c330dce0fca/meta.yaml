@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/parshin_sa2/Desktop/Desktop/Education/MLOps%20%D0%B8%20production%20%D0%BF%D0%BE%D0%B4%D1%85%D0%BE%D0%B4%20%D0%BA%20ML%20%D0%B8%D1%81%D1%81%D0%BB%D0%B5%D0%B4%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%D0%BC/mlops-course/mlruns/1/31eb737f2b164d6c89cd8c330dce0fca/artifacts
+end_time: 1652912574702
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: 31eb737f2b164d6c89cd8c330dce0fca
+run_uuid: 31eb737f2b164d6c89cd8c330dce0fca
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1652912561399
+status: 3
+tags: []
+user_id: parshin_sa2

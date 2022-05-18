@@ -1,4 +1,3 @@
-import imp
 # test example
 import os
 from random import random, randint

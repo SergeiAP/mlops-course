@@ -37,4 +37,3 @@ def evaluate(input_paths: List[str], output_path: str):
 
 if __name__ == "__main__":
     evaluate()  # pylint: disable=no-value-for-parameter
-
