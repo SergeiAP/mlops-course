@@ -12,7 +12,7 @@ SEED = 42
 
 @click.command()
 @click.argument("input_filepath", type=click.Path(exists=True))
-@click.argument("output_filepath", type=click.Path(exists=True), nargs=2)
+@click.argument("output_filepaths", type=click.Path(), nargs=2)
 def prepare_datasets(input_filepath: str, output_filepaths: list[str]) -> None:
     """_summary_
 

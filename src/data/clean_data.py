@@ -1,6 +1,5 @@
 import click
 import pandas as pd
-from src.data.select_region import MAX_PRICE, MIN_PRICE
 
 MAX_AREA = 300
 MIN_AREA = 15

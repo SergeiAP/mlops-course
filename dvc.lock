@@ -14,3 +14,105 @@ stages:
     - path: data/interim/data_regional.csv
       md5: ce43fe511dd122670f536b2ef3d26136
       size: 32927996
+  get_osm_cafes_data:
+    cmd: python src/data/get_osm_cafes_data.py "https://maps.mail.ru/osm/tools/overpass/api/interpreter?data=[out:json];nwr['addr:street'='Лиговский
+      проспект']['addr:housenumber'=101];node[amenity=cafe](around:25000);out geom;"
+      data/external/data_cafes.geojson
+    deps:
+    - path: src/data/get_osm_cafes_data.py
+      md5: 9e70c9582687a1cd12a834ff46628b8f
+      size: 1004
+    outs:
+    - path: data/external/data_cafes.geojson
+      md5: 9be02ee6f76b51bf4ab0dea35fbd8327
+      size: 1196074
+  clean_data:
+    cmd: python src/data/clean_data.py data/interim/data_regional.csv data/interim/data_cleaned.csv
+    deps:
+    - path: data/interim/data_regional.csv
+      md5: ce43fe511dd122670f536b2ef3d26136
+      size: 32927996
+    - path: src/data/clean_data.py
+      md5: 59660058814d65ee6b0c6433edcb1b9c
+      size: 1700
+    outs:
+    - path: data/interim/data_cleaned.csv
+      md5: bd17264194a7b570d4137b4403ad41a7
+      size: 28629519
+  add_features:
+    cmd: python src/features/add_features.py data/interim/data_cleaned.csv data/interim/data_featured.csv
+    deps:
+    - path: data/interim/data_cleaned.csv
+      md5: bd17264194a7b570d4137b4403ad41a7
+      size: 28629519
+    - path: src/features/add_features.py
+      md5: 3ea684449510d3ebb36347f729c01d66
+      size: 1162
+    outs:
+    - path: data/interim/data_featured.csv
+      md5: 51a2b1d452ed103ecf2745a0884a2f1f
+      size: 35934376
+  add_cafes_in_radius:
+    cmd: python src/features/add_cafe_radius_features.py data/interim/data_featured.csv
+      data/external/data_cafes.geojson data/processed/dataset.csv
+    deps:
+    - path: data/external/data_cafes.geojson
+      md5: 9be02ee6f76b51bf4ab0dea35fbd8327
+      size: 1196074
+    - path: data/interim/data_featured.csv
+      md5: 51a2b1d452ed103ecf2745a0884a2f1f
+      size: 35934376
+    - path: src/features/add_cafe_radius_features.py
+      md5: beb449ba9311794cf55f2db1242093e8
+      size: 2084
+    outs:
+    - path: data/processed/dataset.csv
+      md5: ecca661e852e5e9d884970d1ac675715
+      size: 53948303
+  prepare_datasets:
+    cmd: python src/models/prepare_datasets.py data/processed/dataset.csv data/processed/train.csv
+      data/processed/test.csv
+    deps:
+    - path: data/processed/dataset.csv
+      md5: ecca661e852e5e9d884970d1ac675715
+      size: 53948303
+    - path: src/models/prepare_datasets.py
+      md5: 1671403c7d8ac3ca6cd2ddba478ea5a8
+      size: 1178
+    outs:
+    - path: data/processed/test.csv
+      md5: 04f47936b061145c71b2aa2a7a205044
+      size: 6819671
+    - path: data/processed/train.csv
+      md5: 57c744da59b2ab5d29764deac0f99bcf
+      size: 20454977
+  train:
+    cmd: python src/models/train.py data/processed/train.csv data/processed/test.csv
+      models/model.clf
+    deps:
+    - path: data/processed/test.csv
+      md5: 04f47936b061145c71b2aa2a7a205044
+      size: 6819671
+    - path: data/processed/train.csv
+      md5: 57c744da59b2ab5d29764deac0f99bcf
+      size: 20454977
+    - path: src/models/train.py
+      md5: dea6a8e6fbebfc720c8a127b90e27a0e
+      size: 1627
+    outs:
+    - path: models/model.clf
+      md5: 28b505c0c7982feef6692dc9aaf26c1d
+      size: 12831094
+  evaluate:
+    cmd: python src/models/evaluate.py data/processed/test.csv models/model.clf reports/scores.csv
+    deps:
+    - path: models/model.clf
+      md5: 28b505c0c7982feef6692dc9aaf26c1d
+      size: 12831094
+    - path: src/models/evaluate.py
+      md5: 235075d139b992320f491d4eac6e4be0
+      size: 966
+    outs:
+    - path: reports/scores.csv
+      md5: b5995c0e5f0877939b4955428be522a0
+      size: 47

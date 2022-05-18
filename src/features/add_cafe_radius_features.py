@@ -1,4 +1,4 @@
-import click
+import click # pylint disable=missing-module-docstring
 import numpy as np
 import pandas as pd
 import geopandas as gpd
@@ -8,7 +8,7 @@ from shapely.geometry import Point
 RADIUS_LIST = [0.002, 0.005, 0.08, 0.012]
 
 
-def add_cafee_feature(gdf: gpf.GeoDataFrame, cafes_gdf: gpf.GeoDataFrame, radius: float) -> gpf.GeoDataFrame:
+def add_cafes_in_radius(gdf: gpd.GeoDataFrame, cafes_gdf: gpd.GeoDataFrame, radius: float) -> gpd.GeoDataFrame:
     """_summary_
 
     Args:
@@ -33,22 +33,25 @@ def add_cafee_feature(gdf: gpf.GeoDataFrame, cafes_gdf: gpf.GeoDataFrame, radius
     return gdf
 
 
+
 @click.command()
 @click.argument("input_filepath", type=click.Path(exists=True))
 @click.argument("input_cafepath", type=click.Path(exists=True))
-@click.argument("output_filepath", type=click.Path(exists=True))
+@click.argument("output_filepath", type=click.Path())
 def add_cafe_radius_features(input_filepath: str, input_cafepath: str, output_filepath: str) -> None:
     df = pd.read_csv(input_filepath)
     df['geometry'] = [Point(xy) for xy in zip(df.geo_lon, df.geo_lat)]
     gdf = gpd.GeoDataFrame(df, geometry='geometry')
-    
+
     cafes_gdf = gpd.read_file(input_cafepath)
     cafes_gdf = cafes_gdf.set_geometry('geometry')
-    
+
     for radius in RADIUS_LIST:
-        gdf = add_cafee_feature(gdf, cafes_gdf, radius)
-        
+        print(f"Adding radius = {radius}")
+        gdf = add_cafes_in_radius(gdf, cafes_gdf, radius)
+
     gdf.to_csv(output_filepath, index=False)
+
     
     
 if __name__ == "__main__":
