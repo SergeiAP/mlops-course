@@ -1,9 +1,9 @@
 import click
-import nacl
 import pandas as pd
 import joblib as jb
 import lightgbm as lgb
 import mlflow
+import os
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import json
 
@@ -12,7 +12,11 @@ FEATURES = ['price', 'geo_lat', 'geo_lon', 'building_type', 'level', 'levels',
             'area', 'kitchen_area', 'object_type', 'year', 'month',
             'level_to_levels', 'area_to_rooms', 'cafes_0.012', 'cafes_0.08']
 
-mlflow.set_tracking_uri("http://127.0.0.1:5000")
+os.environ['MLFLOW_TRACKING_USERNAME'] = "username"
+os.environ['MLFLOW_TRACKING_PASSWORD'] = "pwd"
+os.environ['MLFLOW_TRACKING_INSECURE_TLS'] = "true"
+
+mlflow.set_tracking_uri("https://dagshub.com/SergeiAP/mlops-course.mlflow") # "http://127.0.0.1:5000"
 mlflow.set_experiment("light_gbm")
 
 @click.command()
