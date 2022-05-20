@@ -15,3 +15,6 @@ venv
 
 # git
 .git/
+
+# Experiments from mlflow
+mlruns

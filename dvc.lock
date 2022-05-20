@@ -130,12 +130,12 @@ stages:
       md5: 57c744da59b2ab5d29764deac0f99bcf
       size: 20454977
     - path: src/models/train_eval.py
-      md5: 0450c16a9bcb9f60d8d0b455bab3b2f8
-      size: 2777
+      md5: 4af77db00883c3e91fa814845d3b2cbd
+      size: 3619
     outs:
     - path: models/model.clf
-      md5: a8cd99ce77e71f977efff87aacb34059
-      size: 10340015
+      md5: b086ea48954e8bb5ac0f0efa7a04f14c
+      size: 10339001
     - path: reports/metrics.json
-      md5: 5da2ffdb78642ea603e67163134590aa
-      size: 65
+      md5: 39545eba761d7631c22fcf39b1bb04e4
+      size: 66
