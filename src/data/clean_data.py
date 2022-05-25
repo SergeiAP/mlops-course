@@ -1,3 +1,4 @@
+# pylint: disable=missing-module-docstring
 import click
 import pandas as pd
 
